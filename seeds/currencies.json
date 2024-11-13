@@ -1,0 +1,29 @@
+{
+    "currencies": [
+        {
+            "name": "USD",
+            "initialBalance": 1000000,
+            "settlementTime": 3
+        },
+        {
+            "name": "EUR",
+            "initialBalance": 921658,
+            "settlementTime": 2
+        },
+        {
+            "name": "JPY",
+            "initialBalance": 109890110,
+            "settlementTime": 3
+        },
+        {
+            "name": "GBP",
+            "initialBalance": 750000,
+            "settlementTime": 2
+        },
+        {
+            "name": "AUD",
+            "initialBalance": 1349528,
+            "settlementTime": 3
+        }
+    ]
+}
