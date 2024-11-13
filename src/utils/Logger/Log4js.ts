@@ -13,6 +13,14 @@ export class Log4js implements ILogger {
     this.logger = log4js.getLogger(options.id);
   }
 
+  log4js(){ 
+    return log4js;
+
+  }
+  appLogger(){
+    return log4js.getLogger('app')
+  }
+
   Info(...info: any): void {
     this.logger.info(info);
   }
@@ -24,4 +32,5 @@ export class Log4js implements ILogger {
   Warn(...message: any): void {
     this.logger.warn(message);
   }
+  
 }

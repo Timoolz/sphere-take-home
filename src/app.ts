@@ -19,6 +19,12 @@ app.use(cors());
 app.use(morgan('combined', {
   skip: (req, res) => res.statusCode < 400 && process.env.NODE_ENV === 'production'
 }));
+const accessLogger = Logger.log4js().connectLogger(Logger.appLogger(), {
+  level: 'auto',
+  format: ':method :url - Status::statusCode - :response-time ms',
+});
+
+app.use(accessLogger);
 
 app.use(bodyParser.json());
 
