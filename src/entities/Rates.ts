@@ -7,9 +7,11 @@ import {
   BaseEntity,
   VersionColumn,
   PrimaryGeneratedColumn,
+  Index,
 
 } from 'typeorm';
 import { SupportedCurrency, TransferStatus } from '../interfaces';
+@Index("UQ_pair", ["sourceCurrency", "destinationCurrency", "ts"], { unique: true })
 
 @Entity('rates')
 export class Rates extends BaseEntity {
@@ -22,6 +24,9 @@ export class Rates extends BaseEntity {
 
     @Column({ type: 'varchar', name: 'destination_currency', nullable: false })
       destinationCurrency!: SupportedCurrency;
+
+    @Column({ type: 'decimal', precision: 19, scale: 9, name: 'rate', nullable: false })
+      rate!: number;
 
     @Column({ type: 'timestamp', name: 'ts', nullable: false })
       ts!: Date;
