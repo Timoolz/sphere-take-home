@@ -10,7 +10,6 @@ export const ratesValidator = [
     })
     .exists()
     .trim(),
-    // .escape(),
   body('rate', 'Rate')
     .isNumeric()
     .exists()

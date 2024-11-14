@@ -15,10 +15,7 @@ export const Validator = {
 
       return res.status(400).json(
         new BadRequest({
-          data: errors.array().map(({ type, msg }) => ({
-            type,
-            message: msg,
-          })),
+          data: errors,
         }),
       );
     };

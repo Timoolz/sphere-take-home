@@ -1,6 +1,6 @@
 
 export enum TransferStatus {
-    Inititiated = 'inititiated',
+    Initiated = 'initiated',
     Processing = 'processing',
     Successful = 'successful',
     Failed = 'failed',

@@ -109,7 +109,7 @@ export class ConflictError implements IError {
 
   constructor(error?: any) {
     this.code = ErrorCode.CONFLICT;
-    this.message = error.message || 'Duplicated request';
+    this.message = error.message || 'Duplicate request';
     this.data = error.data;
   }
 }

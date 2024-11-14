@@ -4,8 +4,10 @@ import {Request, Response} from 'express';
 
 import { handleUnhandledError, unknownRouteError } from '../utils/errors/ErrorHandlers';
 import { Validator } from '../middlewares';
-import { ratesValidator } from '../validators';
+import { ratesValidator, transfersValidator } from '../validators';
 import { RateController } from '../controllers/RateController';
+import { TransferController } from '../controllers/TransferController';
+
 
 
 const router: express.Router = express.Router();
@@ -18,6 +20,12 @@ router.post(
   '/fx-rate',
   Validator.validate(ratesValidator),
   RateController.updateRate
+);
+
+router.post(
+  '/transfer',
+  Validator.validate(transfersValidator),
+  TransferController.transfer
 );
 
 

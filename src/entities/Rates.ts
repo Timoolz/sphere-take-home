@@ -11,6 +11,7 @@ import {
 
 } from 'typeorm';
 import { SupportedCurrency, TransferStatus } from '../interfaces';
+@Index('IDX_currency_ts', ['sourceCurrency', 'destinationCurrency', 'ts'])
 @Index("UQ_pair", ["sourceCurrency", "destinationCurrency", "ts"], { unique: true })
 
 @Entity('rates')

@@ -20,6 +20,12 @@ export class Transfers extends BaseEntity {
     @Column({ type: 'varchar', name: 'narration', nullable: false })
       narration!: string;
 
+    @Column({ type: 'varchar', name: 'source', nullable: false })
+      source!: string;
+
+    @Column({ type: 'varchar', name: 'destination', nullable: false })
+      destination!: string;
+
     @Column({ type: 'varchar', name: 'reference', nullable: false })
     @Index('UQ_reference', { unique: true })
       reference!: string;
@@ -45,8 +51,11 @@ export class Transfers extends BaseEntity {
     @Column({ type: 'decimal', precision: 19, scale: 9, name: 'applied_margin_amount' })
       appliedMarginAmount!: number;
 
-    @Column({ type: 'varchar', name: 'status'})
+    @Column({ type: 'varchar', name: 'status' })
       status!: TransferStatus;
+
+    @Column({ type: 'varchar', name: 'status_description', nullable: true })
+      statusDescription: string | undefined;
 
     @Column({ type: 'timestamp', name: 'initiated_at', nullable: false })
       initiatedAt!: Date;
