@@ -18,7 +18,6 @@ export const transferService = {
 
     Logger.Info({ trasnferRequest, message: 'About to process Transfer' });
 
-    await this.validateIdempotence(idempotenceKey, trasnferRequest.reference);
     const transfer = await this.initiateTransfer(idempotenceKey, trasnferRequest);
     return Promise.resolve(this.mapTransfer(transfer));
 
@@ -29,6 +28,9 @@ export const transferService = {
     Logger.Info({ trasferRequest, message: 'Intiating Transfer' });
 
     return await SqlDataSource.transaction(async (manager: EntityManager) => {
+
+      await this.validateIdempotence(manager, idempotenceKey, trasferRequest.reference);
+
 
       const now = new Date();
 
@@ -202,8 +204,8 @@ export const transferService = {
 
 
 
-  async validateIdempotence(idempotenceKey: string, reference: string) {
-    const transferRepository = SqlDataSource.getRepository(Transfers);
+  async validateIdempotence(manager: EntityManager, idempotenceKey: string, reference: string) {
+    const transferRepository = manager.getRepository(Transfers);
     const existingTransfer = await transferRepository.existsBy([{ idempotenceId: idempotenceKey }, { reference }]);
 
     if (existingTransfer) {
@@ -243,7 +245,7 @@ export const transferService = {
             .select('SUM(transfers.destination_amount)', 'total')
             .where('transfers.destination_currency = :currencyName', { currencyName })
             .andWhere('transfers.completed_at BETWEEN :lastRebalance AND :now', { lastRebalance: currency.lastRebalance, now })
-            .andWhere('transfers.status = :status', { status: TransferStatus.Successful }) // Assuming you want successful transfers
+            .andWhere('transfers.status = :status', { status: TransferStatus.Successful })
             .getRawOne();
 
           const totalTransactionVolume = transactionVolume?.total || 0;
