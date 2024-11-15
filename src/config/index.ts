@@ -1,4 +1,4 @@
-import { ProviderEnum } from "../interfaces/Providers";
+import { ProviderEnum } from '../interfaces/Providers';
 
 export const appEnv = <string>process.env.NODE_ENV;
 
@@ -30,6 +30,12 @@ export const SphereConfig = {
 
   rebalanceFrequency: <unknown>process.env.REBALANCE_FREQUENCY,
   processingProvider: process.env.PROCESSING_PROVIDER!.toUpperCase() as ProviderEnum,
+
+  transactionVolumeWeight : <number><unknown>process.env.TRANSACTION_VOLUME_WEIGHT!,
+  historicalDemandWeight :<number><unknown>process.env.HISTORICAL_DEMAND_WEIGHT!,
+  historicalCutOff: <number><unknown>process.env.HISTORICAL_CUTOFF_DAYS!,
+  rebalanceInterval : <string>process.env.LIQUIDITY_REBALANCE_INTERVAL!, 
+
 
 
 

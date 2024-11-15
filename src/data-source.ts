@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { Currencies, Rates, Transfers } from './entities';
+import { Currencies, DailyRevenue, Rates, Transfers } from './entities';
 import dotenv from 'dotenv';
 
 
@@ -21,6 +21,7 @@ const SqlDataSource = new DataSource({
     Rates,
     Currencies,
     Transfers,  
+    DailyRevenue,
   ],
   subscribers: [],
   migrations: [],

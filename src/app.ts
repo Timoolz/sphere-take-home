@@ -6,11 +6,13 @@ import helmet from 'helmet';
 import methodOverride from 'method-override';
 import cors from 'cors';
 import morgan from 'morgan';
-import { appEnv } from './config';
+import { appEnv, SphereConfig } from './config';
 import routes from './routes';
 import { Logger } from './utils/Logger';
 import { LoggerFactory } from './utils/Logger/LoggerFactory';
 import { Log4js } from './utils/Logger/Log4js';
+import cron from 'node-cron';
+import { transferService } from './services';
 
 const app = express();
 
@@ -56,5 +58,9 @@ const router = express.Router();
 
 router.use(routes);
 app.use(router);
+
+cron.schedule(SphereConfig.rebalanceInterval, 
+  transferService.rebalanceLiquidityPools
+);
 
 export default app;
